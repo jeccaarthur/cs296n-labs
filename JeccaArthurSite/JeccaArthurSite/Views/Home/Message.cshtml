@@ -1,0 +1,76 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Message";
+}
+
+<!-- JUMBOTRON -->
+<div class="jumbotron text-center">
+    <h1>Send a Raven</h1>
+</div>
+<!-- END JUMBOTRON -->
+
+
+<!-- FORM -->
+<div class="container">
+    <div class="form-container mx-auto">
+        <div class="card-body">
+            <form method="post" class="p-5">
+                <div class="form-group form-card p-5">
+                    <div class="row p-3">
+                        <label for="senderName" asp-for="Sender.Name">Your Name:</label>
+                        <input id="senderName" class="form-control" asp-for="Sender.Name" />
+                    </div>
+                    <br />
+
+                    <div class="row p-3">
+                        <label for="recipientName" asp-for="Recipient.Name">Send raven to:</label>
+                        <input id="recipientName" class="form-control" asp-for="Recipient.Name" />
+                    </div>
+                    <br />
+
+                    <div class="row p-3">
+                        <label for="subject" asp-for="Subject">Subject:</label>
+                        <input id="subject" class="form-control" asp-for="Subject" />
+                    </div>
+                    <br />
+
+                    <div class="row p-3">
+                        <label for="body" asp-for="Body">Message:</label>
+                        <textarea id="body" class="form-control" asp-for="Body"></textarea>
+                    </div>
+                    <br>
+
+                    <div class="row text-center">
+                        <button type="submit" class="btn btn-lg btn-success mx-auto px-5 flyButton">Fly</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END FORM -->
+
+
+<hr />
+
+
+<!-- MESSAGE OUTPUT -->
+        @if (Model != null)
+        {
+            <div class="mx-auto p-5">
+                <div class="card card-body mx-auto py-3">
+                    <div class="container messageOutput">
+                        <div class="row text-center">
+                            <h2>Your Message</h2>
+                        </div>
+                        <div class="row p-2"><span class="mr-2"><strong>Sender: </strong></span>@Model.Sender.Name</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Recipient: </strong></span>@Model.Recipient.Name</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Subject: </strong></span>@Model.Subject</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Message: </strong></span>@Model.Body</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@Model.Date</div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        }
+            <!-- END MESSAGE OUTPUT -->
