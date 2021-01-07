@@ -1,0 +1,28 @@
+﻿@* specify model type *@
+@model List<Message>
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+
+
+
+@foreach (Message m in Model)
+{
+    <div class="mx-auto p-5">
+        <div class="card card-body mx-auto py-3">
+            <div class="container messageOutput">
+                <div class="row text-center">
+                    <h2>Your Message</h2>
+                </div>
+                <div class="row p-2"><span class="mr-2"><strong>Sender: </strong></span>@m.Sender.Name</div>
+                <div class="row p-2"><span class="mr-2"><strong>Recipient: </strong></span>@m.Recipient.Name</div>
+                <div class="row p-2"><span class="mr-2"><strong>Subject: </strong></span>@m.Subject</div>
+                <div class="row p-2"><span class="mr-2"><strong>Message: </strong></span>@m.Body</div>
+                <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@m.Date</div>
+                <br />
+            </div>
+        </div>
+    </div>
+}
