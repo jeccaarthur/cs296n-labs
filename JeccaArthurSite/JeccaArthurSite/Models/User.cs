@@ -12,7 +12,7 @@ namespace Winterfell.Models
 
         [Required]
         [StringLength(60, MinimumLength = 1)]
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         // public string Email { get; set; }
     }
