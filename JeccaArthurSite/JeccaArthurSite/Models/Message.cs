@@ -11,10 +11,11 @@ namespace Winterfell.Models
 
         public User Recipient { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A subject is required")]
         public string Subject { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Message body is required")]
+        [StringLength(500, ErrorMessage = "Message cannot exceed 500 characters")]
         public string Body { get; set; }
 
         public DateTime Date { get; set; }
