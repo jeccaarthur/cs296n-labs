@@ -28,12 +28,12 @@ namespace Winterfell.Repositories
             context.SaveChanges();
         }
 
-        public void AddUser(Message message, User user)
+        public void AddUser(Message message, AppUser user)
         {
             throw new NotImplementedException();
         }
 
-        public Message GetMessageBySender(User sender)
+        public Message GetMessageBySender(AppUser sender)
         {
             throw new NotImplementedException();
         }

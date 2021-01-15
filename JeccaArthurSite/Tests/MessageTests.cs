@@ -23,8 +23,8 @@ namespace Tests
             var controller = new HomeController(_logger, fakeRepo);
             var message = new Message()
             {
-                Sender = new User() { Name = "Jecca" },
-                Recipient = new User() { Name = "Misha" },
+                Sender = new AppUser() { Name = "Jecca" },
+                Recipient = new AppUser() { Name = "Misha" },
                 Subject = "Bacon",
                 Body = "Stop begging"
             };
@@ -48,24 +48,24 @@ namespace Tests
 
             var message1 = new Message()
             {
-                Sender = new User() { Name = "Jecca" },
-                Recipient = new User() { Name = "Misha" },
+                Sender = new AppUser() { Name = "Jecca" },
+                Recipient = new AppUser() { Name = "Misha" },
                 Subject = "Bacon",
                 Body = "Stop begging"
             };
 
             var message2 = new Message()
             {
-                Sender = new User() { Name = "Misha" },
-                Recipient = new User() { Name = "Jecca" },
+                Sender = new AppUser() { Name = "Misha" },
+                Recipient = new AppUser() { Name = "Jecca" },
                 Subject = "Bacon",
                 Body = "Give me bacon"
             };
 
             var message3 = new Message()
             {
-                Sender = new User() { Name = "Misha" },
-                Recipient = new User() { Name = "Misha" },
+                Sender = new AppUser() { Name = "Misha" },
+                Recipient = new AppUser() { Name = "Misha" },
                 Subject = "Bacon",
                 Body = "Get the bacon"
             };
