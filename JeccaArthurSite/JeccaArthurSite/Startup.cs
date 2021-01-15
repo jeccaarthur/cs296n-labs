@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Winterfell.Models;
 using System.Runtime.InteropServices;
 using Winterfell.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace Winterfell
 {
@@ -27,8 +28,6 @@ namespace Winterfell
             .AddRazorRuntimeCompilation();
 
             // add service for DbContext with SQLite - this is dependency injection
-            // services.AddDbContext<MessageContext>(options => options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
-
             // add if statement to support azure db
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -39,7 +38,9 @@ namespace Winterfell
             {
                 services.AddDbContext<MessageContext>(options => options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
             }
-            
+
+            // add identity service
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MessageContext>().AddDefaultTokenProviders();
 
             // injects repository into any controller that has it specified in its constructor
             services.AddTransient<IMessages, MessagesRepository>(); // specify repository interface, then repository
@@ -63,6 +64,7 @@ namespace Winterfell
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
