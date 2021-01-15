@@ -30,16 +30,16 @@ namespace Winterfell
             // services.AddDbContext<MessageContext>(options => options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
 
             // add if statement to support azure db
-            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            //{
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
                 services.AddDbContext<MessageContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:AzureSQLServerConnection"]));
-            //}
-            /*
+            }
+            
             else
             {
                 services.AddDbContext<MessageContext>(options => options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
             }
-            */
+            
 
             // injects repository into any controller that has it specified in its constructor
             services.AddTransient<IMessages, MessagesRepository>(); // specify repository interface, then repository

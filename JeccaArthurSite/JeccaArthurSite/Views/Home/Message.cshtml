@@ -15,27 +15,32 @@
     <div class="form-container mx-auto">
         <div class="card-body">
             <form method="post" class="p-5">
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group form-card p-5">
                     <div class="row p-3">
-                        <label for="senderName" asp-for="Sender.Name">Your Name:</label>
+                        <label for="senderName" asp-for="Sender.Name">Your Name: &nbsp;&nbsp;</label>
+                        <span asp-validation-for="Sender.Name" class="text-danger"></span>
                         <input id="senderName" class="form-control" asp-for="Sender.Name" />
                     </div>
                     <br />
 
                     <div class="row p-3">
-                        <label for="recipientName" asp-for="Recipient.Name">Send raven to:</label>
+                        <label for="recipientName" asp-for="Recipient.Name">Send raven to: &nbsp;&nbsp;</label>
+                        <span asp-validation-for="Recipient.Name" class="text-danger"></span>
                         <input id="recipientName" class="form-control" asp-for="Recipient.Name" />
                     </div>
                     <br />
 
                     <div class="row p-3">
-                        <label for="subject" asp-for="Subject">Subject:</label>
+                        <label for="subject" asp-for="Subject">Subject: &nbsp;&nbsp;</label>
+                        <span asp-validation-for="Subject" class="text-danger"></span>
                         <input id="subject" class="form-control" asp-for="Subject" />
                     </div>
                     <br />
 
                     <div class="row p-3">
-                        <label for="body" asp-for="Body">Message:</label>
+                        <label for="body" asp-for="Body">Message: &nbsp;&nbsp;</label>
+                        <span asp-validation-for="Body" class="text-danger"></span>
                         <textarea id="body" class="form-control" asp-for="Body"></textarea>
                     </div>
                     <br>
