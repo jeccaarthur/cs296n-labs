@@ -7,9 +7,9 @@ namespace Winterfell.Models
     {
         public int MessageID { get; set; }
 
-        public User Sender { get; set; }
+        public AppUser Sender { get; set; }
 
-        public User Recipient { get; set; }
+        public AppUser Recipient { get; set; }
 
         [Required(ErrorMessage = "A subject is required")]
         public string Subject { get; set; }
