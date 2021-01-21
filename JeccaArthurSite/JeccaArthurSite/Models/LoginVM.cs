@@ -1,10 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace Winterfell.Models
 {
     public class LoginVM
     {
-        public LoginVM()
-        {
-        }
+        [Required(ErrorMessage = "Please enter a username.")]
+        [StringLength(255)]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Please enter a password.")]
+        [StringLength(255)]
+        public string Password { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }
