@@ -7,8 +7,7 @@ namespace Winterfell.Models
     public class SeedData
     {
         public static void Seed(MessageContext context, RoleManager<IdentityRole> roleManager)
-        {
-            if (!context.Messages.Any())  // this is to prevent duplicate data from being added
+        {            if (!context.Messages.Any())  // this is to prevent duplicate data from being added
             {
                 // create member role
                 // TODO: check the result to see if the role was successfully added
