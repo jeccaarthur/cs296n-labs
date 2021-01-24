@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Winterfell.Models;
 using Winterfell.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Winterfell.Controllers
 {
@@ -16,14 +18,15 @@ namespace Winterfell.Controllers
         private readonly ILogger<HomeController> _logger;
 
         IMessages repository;
+        UserManager<AppUser> userManager;
 
         // any controller that needs to access the db must have an instance of the context object
         // passed to its constructor as a param (MessageContext c)
-        public HomeController(ILogger<HomeController> logger, IMessages r)
+        public HomeController(ILogger<HomeController> logger, IMessages r, UserManager<AppUser> u)
         {
             _logger = logger;
-
             repository = r;
+            userManager = u;
         }
 
         public IActionResult Index()
@@ -37,6 +40,7 @@ namespace Winterfell.Controllers
         }
 
         // invoke the view with a form for entering a message
+        [Authorize]
         public IActionResult Message()
         {
             return View();
@@ -46,6 +50,10 @@ namespace Winterfell.Controllers
         [HttpPost]
         public IActionResult Message(Message message)
         {
+            message.Sender = userManager.GetUserAsync(User).Result;
+            // TODO: get the user's real name in registration and replace below
+            message.Sender.Name = message.Sender.UserName;      // temporary hack
+            
             message.Date = DateTime.Now;
 
             if (ModelState.IsValid)
