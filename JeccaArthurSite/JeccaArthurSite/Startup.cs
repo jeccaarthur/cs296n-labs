@@ -47,7 +47,7 @@ namespace Winterfell
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageContext context)
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +73,10 @@ namespace Winterfell
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var serviceProvider = app.ApplicationServices;
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            SeedData.Seed(context, roleManager);
         }
     }
 }
