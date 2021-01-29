@@ -10,6 +10,7 @@
     <Folder Include="Views\Info\" />
     <Folder Include="Views\Events\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
