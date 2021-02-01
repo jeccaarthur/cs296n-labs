@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Winterfell.Models
 {
@@ -13,5 +14,8 @@ namespace Winterfell.Models
         [StringLength(60, MinimumLength = 1)]
         [RegularExpression(@"^[a-zA-Z]{1,60}$", ErrorMessage = "User's name must be alphabetic characters only")]
         public string Name { get; set; }
+
+        [NotMapped]
+        public IList<string> RoleNames { get; set; }
     }
 }
