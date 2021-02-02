@@ -6,13 +6,25 @@ namespace Winterfell.Models
 {
     public class SeedData
     {
-        public static void Seed(MessageContext context, RoleManager<IdentityRole> roleManager)
-        {            if (!context.Messages.Any())  // this is to prevent duplicate data from being added
+        public static void Seed(MessageContext context, RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
+        {
+            if (!context.Messages.Any())  // this is to prevent duplicate data from being added
             {
                 // create member role
                 // TODO: check the result to see if the role was successfully added
                 var result = roleManager.CreateAsync(new IdentityRole("Member")).Result;
                 result = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+
+                // seeding a default administrator. They will need to change their password after logging in.
+                AppUser siteadmin = new AppUser
+                {
+                    UserName = "SiteAdmin",
+                    Name = "Site Admin"
+                };
+
+                userManager.CreateAsync(siteadmin, "Secret-123").Wait();
+                IdentityRole adminRole = roleManager.FindByNameAsync("Admin").Result;
+                userManager.AddToRoleAsync(siteadmin, adminRole.Name);
 
                 AppUser jonSnow = new AppUser { UserName = "jonSnow", Name = "Jon Snow" };
                 AppUser dany = new AppUser { UserName = "dany", Name = "Daenerys Targaryen" };
