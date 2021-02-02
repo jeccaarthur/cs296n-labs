@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ using Winterfell.Repositories;
 
 namespace Winterfell.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private UserManager<AppUser> userManager;
@@ -99,6 +100,37 @@ namespace Winterfell.Controllers
                 AppUser user = await userManager.FindByIdAsync(id);
                 await userManager.AddToRoleAsync(user, adminRole.Name);
             }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromAdmin(string id)
+        {
+            AppUser user = await userManager.FindByIdAsync(id);
+            var result = await userManager.RemoveFromRoleAsync(user, "Admin");
+
+            if (result.Succeeded) { }
+
+            return RedirectToAction("Index");
+        }
+
+
+        // role management methods
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+            await roleManager.DeleteAsync(role);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAdminRole()
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
 
             return RedirectToAction("Index");
         }
