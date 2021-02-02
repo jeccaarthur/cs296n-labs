@@ -76,7 +76,9 @@ namespace Winterfell
 
             var serviceProvider = app.ApplicationServices;
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            SeedData.Seed(context, roleManager);
+            var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
+
+            SeedData.Seed(context, roleManager, userManager);
         }
     }
 }
