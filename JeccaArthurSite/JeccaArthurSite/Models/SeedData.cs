@@ -12,6 +12,7 @@ namespace Winterfell.Models
                 // create member role
                 // TODO: check the result to see if the role was successfully added
                 var result = roleManager.CreateAsync(new IdentityRole("Member")).Result;
+                result = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
 
                 AppUser jonSnow = new AppUser { UserName = "jonSnow", Name = "Jon Snow" };
                 AppUser dany = new AppUser { UserName = "dany", Name = "Daenerys Targaryen" };
