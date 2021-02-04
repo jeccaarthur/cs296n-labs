@@ -92,5 +92,10 @@ namespace Winterfell.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
