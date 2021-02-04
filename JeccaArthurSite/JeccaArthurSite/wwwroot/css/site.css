@@ -115,3 +115,7 @@ nav li {
     color: #444444 !important;
 }
 
+    a.btn-light:hover {
+        color: #f0f0f0 !important;
+    }
+
