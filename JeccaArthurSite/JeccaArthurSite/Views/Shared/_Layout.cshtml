@@ -26,10 +26,10 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Info" asp-action="Index">Info</a></li>
                     <li><a asp-controller="Events" asp-action="Events">Events</a></li>
-                    <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
 
                     @if (signInManager.IsSignedIn(User))
                     {
+                        <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
                         <li><a asp-controller="Account" asp-action="LogOut">Logout @User.Identity.Name</a></li>
                     }
                     else
