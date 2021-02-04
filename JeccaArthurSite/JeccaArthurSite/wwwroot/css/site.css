@@ -94,7 +94,11 @@ body {
 }
 
 
-/* nav logo */
+/* navbar */
+.navbar {
+    border-radius: 0px;
+}
+
 .nav-logo {
     display: inline-block;
     background: transparent;
