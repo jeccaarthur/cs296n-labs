@@ -49,7 +49,7 @@ namespace Winterfell.Controllers
             return View(model);
         }
 
-        public IActionResult Login(string returnURL = "")
+        public IActionResult Login(string returnURL)
         {
             var model = new LoginVM
             {
@@ -91,6 +91,11 @@ namespace Winterfell.Controllers
             await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ViewResult AccessDenied()
+        {
+            return View();
         }
     }
 }

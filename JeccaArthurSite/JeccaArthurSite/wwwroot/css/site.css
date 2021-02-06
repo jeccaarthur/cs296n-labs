@@ -94,7 +94,11 @@ body {
 }
 
 
-/* nav logo */
+/* navbar */
+.navbar {
+    border-radius: 0px;
+}
+
 .nav-logo {
     display: inline-block;
     background: transparent;
@@ -103,8 +107,15 @@ body {
     filter: drop-shadow(0 0 0.05rem silver);
 }
 
+nav li {
+    margin-left: 8px;
+}
 
+.btn-light {
+    color: #444444 !important;
+}
 
-
-
+    a.btn-light:hover {
+        color: #f0f0f0 !important;
+    }
 

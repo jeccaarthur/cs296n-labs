@@ -26,16 +26,16 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Info" asp-action="Index">Info</a></li>
                     <li><a asp-controller="Events" asp-action="Events">Events</a></li>
-                    <li><a asp-controller="Info" asp-action="Quiz">Take The Quiz</a></li>
 
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li><a asp-controller="Account" asp-action="LogOut">Logout @User.Identity.Name</a></li>
+                        <li><a class="btn btn-light" asp-controller="Admin" asp-action="Index">Admin</a></li>
+                        <li><a class="btn btn-light" asp-controller="Account" asp-action="LogOut">Logout @User.Identity.Name</a></li>
                     }
                     else
                     {
-                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                        <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a class="btn btn-light" asp-controller="Account" asp-action="Register">Register</a></li>
+                        <li><a class="btn btn-light" asp-controller="Account" asp-action="Login">Login</a></li>
                     }
 
                 </ul>
