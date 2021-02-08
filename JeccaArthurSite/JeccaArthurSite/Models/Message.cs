@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Winterfell.Models
 {
     public class Message
     {
+        private List<Comment> comments = new List<Comment>();
+
         public int MessageID { get; set; }
 
         public AppUser Sender { get; set; }
@@ -19,5 +22,7 @@ namespace Winterfell.Models
         public string Body { get; set; }
 
         public DateTime Date { get; set; }
+
+        public List<Comment> Comments { get { return comments; } }
     }
 }
