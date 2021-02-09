@@ -9,8 +9,8 @@ using Winterfell.Models;
 namespace Winterfell.Migrations
 {
     [DbContext(typeof(MessageContext))]
-    [Migration("20210115213642_Identity")]
-    partial class Identity
+    [Migration("20210208023752_Comments")]
+    partial class Comments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,6 +216,33 @@ namespace Winterfell.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Winterfell.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CommentText")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CommenterId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("MessageID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CommentID");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("MessageID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Winterfell.Models.Message", b =>
                 {
                     b.Property<int>("MessageID")
@@ -310,6 +337,17 @@ namespace Winterfell.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Winterfell.Models.Comment", b =>
+                {
+                    b.HasOne("Winterfell.Models.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
+                    b.HasOne("Winterfell.Models.Message", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("MessageID");
                 });
 
             modelBuilder.Entity("Winterfell.Models.Message", b =>
