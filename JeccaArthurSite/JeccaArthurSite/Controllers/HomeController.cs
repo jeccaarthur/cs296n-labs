@@ -83,5 +83,33 @@ namespace Winterfell.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Authorize]
+        public IActionResult Comment(int messageID)
+        {
+            var commentVM = new CommentVM { MessageID = messageID };
+
+            return View(commentVM);
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Comment(CommentVM commentVM)
+        {
+            // Comment is the domain model
+            var comment = new Comment { CommentText = commentVM.CommentText };
+            comment.Commenter = userManager.GetUserAsync(User).Result;
+            comment.CommentDate = DateTime.Now;
+
+            // get the message that this comment is for
+            var message = (from r in repository.Messages
+                          where r.MessageID == commentVM.MessageID
+                          select r).First<Message>();
+
+            // Store the review with the comment in the database
+            message.Comments.Add(comment);
+            repository.UpdateMessage(message);
+
+            return RedirectToAction("Messages");
+        }
     }
 }
