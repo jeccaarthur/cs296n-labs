@@ -101,8 +101,7 @@ namespace Winterfell.Controllers
             comment.CommentDate = DateTime.Now;
 
             // get the message that this comment is for
-            Message message = new Message();
-            message = repository.Messages.Where(m => m.MessageID == commentVM.MessageID).SingleOrDefault();
+            Message message = repository.Messages.Where(m => m.MessageID == commentVM.MessageID).SingleOrDefault();
 
             // store the message with the comment in the database
             message.Comments.Add(comment);
