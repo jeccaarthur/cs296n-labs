@@ -37,5 +37,11 @@ namespace Winterfell.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateMessage(Message message)
+        {
+            context.Messages.Update(message);
+            context.SaveChanges();
+        }
     }
 }
