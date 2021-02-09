@@ -18,7 +18,11 @@ namespace Winterfell.Repositories
         {
             get
             {
-                return context.Messages.Include(message => message.Sender).Include(message => message.Recipient);
+                return context.Messages
+                    .Include(message => message.Sender)
+                    .Include(message => message.Recipient)
+                    .Include(message => message.Comments)
+                    .ThenInclude(comment => comment.Commenter);
             }
         }
 
