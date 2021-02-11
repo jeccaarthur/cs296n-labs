@@ -33,7 +33,6 @@ namespace Winterfell
             {
                 services.AddDbContext<MessageContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:AzureSQLServerConnection"]));
             }
-            
             else
             {
                 services.AddDbContext<MessageContext>(options => options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
