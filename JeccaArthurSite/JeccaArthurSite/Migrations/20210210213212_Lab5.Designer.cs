@@ -9,8 +9,8 @@ using Winterfell.Models;
 namespace Winterfell.Migrations
 {
     [DbContext(typeof(MessageContext))]
-    [Migration("20210208023752_Comments")]
-    partial class Comments
+    [Migration("20210210213212_Lab5")]
+    partial class Lab5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

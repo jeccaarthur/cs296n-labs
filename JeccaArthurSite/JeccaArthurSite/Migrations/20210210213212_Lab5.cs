@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Winterfell.Migrations
 {
-    public partial class Comments : Migration
+    public partial class Lab5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
