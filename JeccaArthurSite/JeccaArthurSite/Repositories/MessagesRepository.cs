@@ -18,7 +18,11 @@ namespace Winterfell.Repositories
         {
             get
             {
-                return context.Messages.Include(message => message.Sender).Include(message => message.Recipient);
+                return context.Messages
+                    .Include(message => message.Sender)
+                    .Include(message => message.Recipient)
+                    .Include(message => message.Comments)
+                    .ThenInclude(comment => comment.Commenter);
             }
         }
 
@@ -36,6 +40,12 @@ namespace Winterfell.Repositories
         public Message GetMessageBySender(AppUser sender)
         {
             throw new NotImplementedException();
+        }
+
+        public void UpdateMessage(Message message)
+        {
+            context.Messages.Update(message);
+            context.SaveChanges();
         }
     }
 }

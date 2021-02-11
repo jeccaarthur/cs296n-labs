@@ -6,8 +6,6 @@
 }
 
 
-
-
 @foreach (Message m in Model)
 {
     <div class="mx-auto p-5">
@@ -22,6 +20,25 @@
                 <div class="row p-2"><span class="mr-2"><strong>Message: </strong></span>@m.Body</div>
                 <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@m.Date</div>
                 <br />
+
+                @if (m.Comments.Count != 0)
+                {
+                    <hr />
+                    <h3>Comments</h3>
+
+                    @foreach (Comment c in m.Comments)
+                    {
+                        <div class="row p-2"><span class="mr-2"><strong>Commenter: </strong></span>@c.Commenter.Name</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@c.CommentDate.Date</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Comment:</strong></span>@c.CommentText</div>
+                        <hr />
+                    }
+                }
+
+                <div class="text-center">
+                    <a asp-action="Comment" asp-route-messageID="@m.MessageID" class="text-center btn btn-secondary">Add Comment</a>
+                </div>
+
             </div>
         </div>
     </div>
