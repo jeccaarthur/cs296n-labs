@@ -1,0 +1,70 @@
+LAB 6: Web Security Testing and Countermeasures
+
+Original Alerts:
+Cross Site Scripting (Reflected) (2)
+Cross-Domain Misconfiguration
+Vulnerable JS Library
+X-Frame-Options Header Not Set (33)
+Cookie Without Secure Flag (2)
+Incomplete or No Cache-control and Pragma HTTP Header
+X-Content-Type-Options Header Missing
+Charset Mismatch
+Information Disclosure - Suspicious Comments (2)
+Loosely Scoped Cookie (7)
+Timestamp Disclosure - Unix (202)
+
+
+
+
+Vulnerability: Cross-Domain Misconfiguration
+
+	Added to Startup > ConfigureServices:
+		services.AddCors(options =>
+		{
+		    options.AddDefaultPolicy(
+		        builder =>
+		        {
+		            builder.WithOrigins("https://maxcdn.bootstrapcdn.com", "https://localhost:5001")
+		                .AllowAnyHeader()
+		                .AllowAnyMethod();
+		        });
+		});
+
+
+	Added to Startup > Configure:
+		app.UseCors();
+
+
+
+Vulnerability: X-Frame-Options Header Not Set
+
+	Added to Startup > Configure:
+	    app.Use(async (context, next) =>
+	    {
+	        context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+	        await next();
+	    });
+
+
+
+Vulnerability: Cookie Without Secure Flag 
+
+	Added to Startup > Configure:
+		app.UseCookiePolicy(new CookiePolicyOptions { HttpOnly = HttpOnlyPolicy.Always, Secure = CookieSecurePolicy.Always });
+
+
+
+
+Updated Alerts:
+Cross Site Scripting (Reflected) (2)
+Cross-Domain Misconfiguration
+Vulnerable JS Library
+Incomplete or No Cache-control and Pragma HTTP Header
+X-Content-Type-Options Header Missing
+Information Disclosure - Sensitive Information in URL
+Information Disclosure - Suspicious Comments (2)
+Loosely Scoped Cookie (7)
+Timestamp Disclosure - Unix (202)
+
+
+
