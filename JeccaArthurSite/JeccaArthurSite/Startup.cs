@@ -90,6 +90,13 @@ namespace Winterfell
                 await next();
             });
 
+            // vulnerability: loosely scoped cookies
+            CookieOptions cookie = new CookieOptions
+            {
+                Domain = "https://winterfellja.azurewebsites.net/",
+                Path = "/"   // this allows the cookie access to the root
+            };
+
             // vulnerability: cookie without secure flag
             app.UseCookiePolicy(new CookiePolicyOptions { HttpOnly = HttpOnlyPolicy.Always, Secure = CookieSecurePolicy.Always });
 
