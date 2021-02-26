@@ -53,6 +53,16 @@ Vulnerability: Cookie Without Secure Flag
 		app.UseCookiePolicy(new CookiePolicyOptions { HttpOnly = HttpOnlyPolicy.Always, Secure = CookieSecurePolicy.Always });
 
 
+Vulnerability: Loosely Scoped Cookies
+
+	Added to Startup > Configure:
+		CookieOptions cookie = new CookieOptions
+            {
+                Domain = "https://winterfellja.azurewebsites.net/",
+                Path = "/"   // this allows the cookie access to the root
+            };
+
+
 
 
 Updated Alerts:
@@ -63,7 +73,7 @@ Incomplete or No Cache-control and Pragma HTTP Header
 X-Content-Type-Options Header Missing
 Information Disclosure - Sensitive Information in URL
 Information Disclosure - Suspicious Comments (2)
-Loosely Scoped Cookie (7)
+Loosely Scoped Cookie (?)
 Timestamp Disclosure - Unix (202)
 
 
