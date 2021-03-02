@@ -58,7 +58,8 @@ namespace Winterfell
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MessageContext>().AddDefaultTokenProviders();
 
             // injects repository into any controller that has it specified in its constructor
-            services.AddTransient<IMessages, MessagesRepository>(); // specify repository interface, then repository
+            services.AddTransient<IMessageRepository, MessageRepository>(); // specify repository interface, then repository
+            services.AddTransient<IReplyRepository, ReplyRepository>();
         }
 
 
