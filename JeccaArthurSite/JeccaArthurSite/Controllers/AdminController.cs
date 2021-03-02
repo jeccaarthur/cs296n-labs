@@ -16,10 +16,10 @@ namespace Winterfell.Controllers
     {
         private UserManager<AppUser> userManager;
         private RoleManager<IdentityRole> roleManager;
-        private IMessages messageRepo;
+        private IMessageRepository messageRepo;
 
         public AdminController(UserManager<AppUser> userMngr, RoleManager<IdentityRole> roleMngr,
-            IMessages msgRepo)
+            IMessageRepository msgRepo)
         {
             userManager = userMngr;
             roleManager = roleMngr;

@@ -19,7 +19,7 @@ namespace Tests
         public void TestAddMessage()
         {
             // arrange - create fake repo, controller, new message
-            var fakeRepo = new FakeMessagesRepository();
+            var fakeRepo = new FakeMessageRepository();
             var controller = new HomeController(_logger, fakeRepo);
             var message = new Message()
             {
@@ -43,7 +43,7 @@ namespace Tests
         {
             // arrange - create list, fake repo, controller, new messages
             List<Message> messages = new List<Message>();
-            var fakeRepo = new FakeMessagesRepository();
+            var fakeRepo = new FakeMessageRepository();
             var controller = new HomeController(_logger, fakeRepo);
 
             var message1 = new Message()

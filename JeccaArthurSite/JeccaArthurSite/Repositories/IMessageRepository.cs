@@ -4,7 +4,7 @@ using Winterfell.Models;
 
 namespace Winterfell.Repositories
 {
-    public interface IMessages
+    public interface IMessageRepository
     {
         IQueryable<Message> Messages { get; }
         void AddMessage(Message message);

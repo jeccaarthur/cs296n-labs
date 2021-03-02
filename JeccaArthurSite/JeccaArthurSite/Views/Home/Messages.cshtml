@@ -21,22 +21,22 @@
                 <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@m.Date</div>
                 <br />
 
-                @if (m.Comments.Count != 0)
+                @if (m.Replies.Count != 0)
                 {
                     <hr />
-                    <h3>Comments</h3>
+                    <h3>Replies</h3>
 
-                    @foreach (Comment c in m.Comments)
+                    @foreach (Reply r in m.Replies)
                     {
-                        <div class="row p-2"><span class="mr-2"><strong>Commenter: </strong></span>@c.Commenter.Name</div>
-                        <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@c.CommentDate.Date</div>
-                        <div class="row p-2"><span class="mr-2"><strong>Comment:</strong></span>@c.CommentText</div>
+                        <div class="row p-2"><span class="mr-2"><strong>User: </strong></span>@r.User.Name</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Date: </strong></span>@r.Date</div>
+                        <div class="row p-2"><span class="mr-2"><strong>Reply:</strong></span>@r.ReplyText</div>
                         <hr />
                     }
                 }
 
                 <div class="text-center">
-                    <a asp-action="Comment" asp-route-messageID="@m.MessageID" class="text-center btn btn-secondary">Add Comment</a>
+                    <a asp-action="Reply" asp-route-messageID="@m.MessageID" class="text-center btn btn-secondary">Add Reply</a>
                 </div>
 
             </div>

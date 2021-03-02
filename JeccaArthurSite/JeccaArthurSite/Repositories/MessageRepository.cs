@@ -5,11 +5,11 @@ using Winterfell.Models;
 
 namespace Winterfell.Repositories
 {
-    public class MessagesRepository : IMessages
+    public class MessageRepository : IMessageRepository
     {
         private MessageContext context;
 
-        public MessagesRepository(MessageContext c)
+        public MessageRepository(MessageContext c)
         {
             context = c;
         }
@@ -21,8 +21,8 @@ namespace Winterfell.Repositories
                 return context.Messages
                     .Include(message => message.Sender)
                     .Include(message => message.Recipient)
-                    .Include(message => message.Comments)
-                    .ThenInclude(comment => comment.Commenter);
+                    .Include(message => message.Replies)
+                    .ThenInclude(reply => reply.User);
             }
         }
 

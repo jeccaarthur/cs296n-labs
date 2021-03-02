@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Winterfell.Models
 {
-    public class CommentVM
+    public class ReplyVM
     {
         public int MessageID { get; set; }
 
         public int Subject { get; set; }
 
-        public string CommentText { get; set; }
+        public string ReplyText { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using Winterfell.Models;
 
 namespace Winterfell.Repositories
 {
-    public class FakeMessagesRepository : IMessages
+    public class FakeMessageRepository : IMessageRepository
     {
         private List<Message> messages = new List<Message>();
 
-        public FakeMessagesRepository()
+        public FakeMessageRepository()
         {
         }
 
