@@ -35,6 +35,16 @@ namespace Winterfell.Repositories
             throw new NotImplementedException();
         }
 
+        public void DeleteMessage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Message GetMessageByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Message GetMessageBySender(AppUser sender)
         {
             throw new NotImplementedException();

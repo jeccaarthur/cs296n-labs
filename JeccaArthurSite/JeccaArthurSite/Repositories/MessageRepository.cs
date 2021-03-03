@@ -54,5 +54,13 @@ namespace Winterfell.Repositories
             context.Messages.Update(message);
             context.SaveChanges();
         }
+
+        public void DeleteMessage(int id)
+        {
+            Message message = context.Messages.Where(message => message.MessageID == id).SingleOrDefault();
+
+            context.Remove(message);
+            context.SaveChanges();
+        }
     }
 }

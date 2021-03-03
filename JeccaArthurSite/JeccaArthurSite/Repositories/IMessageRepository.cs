@@ -12,5 +12,6 @@ namespace Winterfell.Repositories
         Message GetMessageBySender(AppUser sender);
         Message GetMessageByID(int id);
         void UpdateMessage(Message message);
+        void DeleteMessage(int id);
     }
 }
