@@ -39,7 +39,7 @@ namespace Winterfell.Controllers
         }
 
         // get one message by ID
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetMessageByID(int id)
         {
             Message message = repository.GetMessageByID(id);
@@ -71,7 +71,7 @@ namespace Winterfell.Controllers
         }
 
         // replace a message
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult ReplaceMessage(int id, Message m)
         {
             Message message = repository.GetMessageByID(id);

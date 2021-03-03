@@ -33,7 +33,7 @@ namespace Winterfell.Controllers
         }
 
         // get one reply by ID
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetReplyByID(int id)
         {
             Reply reply = repository.GetReplyByID(id);
@@ -65,7 +65,7 @@ namespace Winterfell.Controllers
         }
 
         // replace a reply
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult ReplaceReply(int id, Reply r)
         {
             Reply reply = repository.GetReplyByID(id);
