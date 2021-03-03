@@ -70,7 +70,28 @@ namespace Winterfell.Controllers
             }
         }
 
+        // replace a message
         [HttpPut]
+        public IActionResult ReplaceMessage(int id, Message m)
         {
+            Message message = repository.GetMessageByID(id);
+
+            if (message.MessageID == id)
+            {
+                message.Sender = m.Sender;
+                message.Recipient = m.Recipient;
+                message.Subject = m.Subject;
+                message.Body = m.Body;
+                message.Date = m.Date;
+
+                repository.UpdateMessage(message);
+
+                return Ok(message);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }
