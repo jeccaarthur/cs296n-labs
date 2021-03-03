@@ -93,5 +93,22 @@ namespace Winterfell.Controllers
                 return BadRequest();
             }
         }
+
+        // delete a message
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMessage(int id)
+        {
+            Message message = repository.GetMessageByID(id);
+
+            if (message != null)
+            {
+                repository.DeleteMessage(id);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
