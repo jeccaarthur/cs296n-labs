@@ -10,6 +10,7 @@ namespace Winterfell.Repositories
         void AddMessage(Message message);
         void AddUser(Message message, AppUser user);
         Message GetMessageBySender(AppUser sender);
+        Message GetMessageByID(int id);
         void UpdateMessage(Message message);
     }
 }

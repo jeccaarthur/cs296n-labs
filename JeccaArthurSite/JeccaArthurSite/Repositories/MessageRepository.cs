@@ -42,6 +42,13 @@ namespace Winterfell.Repositories
             throw new NotImplementedException();
         }
 
+        public Message GetMessageByID(int id)
+        {
+            Message message = context.Messages.Where(message => message.MessageID == id).SingleOrDefault();
+
+            return message;
+        }
+
         public void UpdateMessage(Message message)
         {
             context.Messages.Update(message);
