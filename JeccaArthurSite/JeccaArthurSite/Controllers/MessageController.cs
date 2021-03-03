@@ -110,5 +110,12 @@ namespace Winterfell.Controllers
                 return NotFound();
             }
         }
+
+        // update a message
+        [HttpPatch("{id}")]
+        public IActionResult UpdateMessage(int id, string op, string path, string value)
+        {
+            return BadRequest();
+        }
     }
 }
