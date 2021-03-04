@@ -60,7 +60,6 @@ namespace Winterfell.Controllers
         {
             if (message != null)
             {
-                message.Sender = userManager.GetUserAsync(User).Result;
                 repository.AddMessage(message);
                 return Ok(message);
             }
@@ -115,7 +114,26 @@ namespace Winterfell.Controllers
         [HttpPatch("{id}")]
         public IActionResult UpdateMessage(int id, string op, string path, string value)
         {
-            return BadRequest();
+            Message message = repository.GetMessageByID(id);
+
+            switch (path)
+            {
+                case "subject":
+                    message.Subject = value;
+                    break;
+                case "body":
+                    message.Body = value;
+                    break;
+                case "date":
+                    message.Date = Convert.ToDateTime(value);
+                    break;
+                default:
+                    return BadRequest();
+            }
+
+            repository.UpdateMessage(message);
+
+            return Ok(message);
         }
     }
 }
