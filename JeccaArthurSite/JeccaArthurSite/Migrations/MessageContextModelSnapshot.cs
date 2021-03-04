@@ -214,33 +214,6 @@ namespace Winterfell.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Winterfell.Models.Comment", b =>
-                {
-                    b.Property<int>("CommentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CommentDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CommentText")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CommenterId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("MessageID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CommentID");
-
-                    b.HasIndex("CommenterId");
-
-                    b.HasIndex("MessageID");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("Winterfell.Models.Message", b =>
                 {
                     b.Property<int>("MessageID")
@@ -272,6 +245,33 @@ namespace Winterfell.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("Winterfell.Models.Reply", b =>
+                {
+                    b.Property<int>("ReplyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("MessageID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ReplyText")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ReplyID");
+
+                    b.HasIndex("MessageID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("Winterfell.Models.AppUser", b =>
@@ -337,17 +337,6 @@ namespace Winterfell.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Winterfell.Models.Comment", b =>
-                {
-                    b.HasOne("Winterfell.Models.AppUser", "Commenter")
-                        .WithMany()
-                        .HasForeignKey("CommenterId");
-
-                    b.HasOne("Winterfell.Models.Message", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("MessageID");
-                });
-
             modelBuilder.Entity("Winterfell.Models.Message", b =>
                 {
                     b.HasOne("Winterfell.Models.AppUser", "Recipient")
@@ -357,6 +346,17 @@ namespace Winterfell.Migrations
                     b.HasOne("Winterfell.Models.AppUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
+                });
+
+            modelBuilder.Entity("Winterfell.Models.Reply", b =>
+                {
+                    b.HasOne("Winterfell.Models.Message", null)
+                        .WithMany("Replies")
+                        .HasForeignKey("MessageID");
+
+                    b.HasOne("Winterfell.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
