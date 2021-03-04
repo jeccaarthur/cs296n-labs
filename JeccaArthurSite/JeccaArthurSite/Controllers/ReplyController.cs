@@ -16,6 +16,12 @@ namespace Winterfell.Controllers
         IReplyRepository repository;
         UserManager<AppUser> userManager;
 
+        public ReplyController(UserManager<AppUser> u, IReplyRepository r)
+        {
+            repository = r;
+            userManager = u;
+        }
+
         // get all replies
         [HttpGet]
         public IActionResult GetReplies()
@@ -54,7 +60,6 @@ namespace Winterfell.Controllers
         {
             if (reply != null)
             {
-                reply.User = userManager.GetUserAsync(User).Result;
                 repository.AddReply(reply);
                 return Ok(reply);
             }
@@ -105,9 +110,25 @@ namespace Winterfell.Controllers
 
         // update a reply
         [HttpPatch("{id}")]
-        public IActionResult UpdateMessage(int id, string op, string path, string value)
+        public IActionResult UpdateReply(int id, string op, string path, string value)
         {
-            return BadRequest();
+            Reply reply = repository.GetReplyByID(id);
+
+            switch (path)
+            {
+                case "subject":
+                    reply.ReplyText = value;
+                    break;
+                case "date":
+                    reply.Date = Convert.ToDateTime(value);
+                    break;
+                default:
+                    return BadRequest();
+            }
+
+            repository.UpdateReply(reply);
+
+            return Ok(reply);
         }
     }
 }
