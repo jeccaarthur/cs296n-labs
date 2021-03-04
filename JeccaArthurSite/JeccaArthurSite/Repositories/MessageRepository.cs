@@ -28,6 +28,7 @@ namespace Winterfell.Repositories
 
         public void AddMessage(Message message)
         {
+            message.Date = DateTime.Now;
             context.Messages.Add(message);
             context.SaveChanges();
         }
@@ -44,7 +45,10 @@ namespace Winterfell.Repositories
 
         public Message GetMessageByID(int id)
         {
-            Message message = context.Messages.Where(message => message.MessageID == id).SingleOrDefault();
+            Message message = context.Messages.Where(message => message.MessageID == id)
+                .Include(message => message.Sender)
+                .Include(message => message.Recipient)
+                .SingleOrDefault();
 
             return message;
         }

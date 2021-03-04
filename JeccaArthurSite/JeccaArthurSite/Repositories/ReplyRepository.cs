@@ -25,6 +25,7 @@ namespace Winterfell.Repositories
 
         public void AddReply(Reply reply)
         {
+            reply.Date = DateTime.Now;
             context.Replies.Add(reply);
             context.SaveChanges();
         }
