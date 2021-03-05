@@ -84,12 +84,12 @@ namespace Winterfell
             // enable CORS
             app.UseCors();
 
-            // set x-frame options
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
-                await next();
-            });
+            // set x-frame options - commented out for lab 9 azure db update
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+            //    await next();
+            //});
 
             // vulnerability: loosely scoped cookies
             CookieOptions cookie = new CookieOptions
