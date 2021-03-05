@@ -13,6 +13,6 @@ namespace Winterfell.Models
 
         public DbSet<Message> Messages { get; set; }
 
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reply> Replies { get; set; }
     }
 }

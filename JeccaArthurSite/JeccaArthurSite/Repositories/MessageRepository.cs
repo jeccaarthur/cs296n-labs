@@ -5,11 +5,11 @@ using Winterfell.Models;
 
 namespace Winterfell.Repositories
 {
-    public class MessagesRepository : IMessages
+    public class MessageRepository : IMessageRepository
     {
         private MessageContext context;
 
-        public MessagesRepository(MessageContext c)
+        public MessageRepository(MessageContext c)
         {
             context = c;
         }
@@ -21,13 +21,14 @@ namespace Winterfell.Repositories
                 return context.Messages
                     .Include(message => message.Sender)
                     .Include(message => message.Recipient)
-                    .Include(message => message.Comments)
-                    .ThenInclude(comment => comment.Commenter);
+                    .Include(message => message.Replies)
+                    .ThenInclude(reply => reply.User);
             }
         }
 
         public void AddMessage(Message message)
         {
+            message.Date = DateTime.Now;
             context.Messages.Add(message);
             context.SaveChanges();
         }
@@ -42,9 +43,27 @@ namespace Winterfell.Repositories
             throw new NotImplementedException();
         }
 
+        public Message GetMessageByID(int id)
+        {
+            Message message = context.Messages.Where(message => message.MessageID == id)
+                .Include(message => message.Sender)
+                .Include(message => message.Recipient)
+                .SingleOrDefault();
+
+            return message;
+        }
+
         public void UpdateMessage(Message message)
         {
             context.Messages.Update(message);
+            context.SaveChanges();
+        }
+
+        public void DeleteMessage(int id)
+        {
+            Message message = context.Messages.Where(message => message.MessageID == id).SingleOrDefault();
+
+            context.Remove(message);
             context.SaveChanges();
         }
     }

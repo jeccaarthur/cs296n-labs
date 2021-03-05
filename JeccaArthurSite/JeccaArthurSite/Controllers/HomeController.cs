@@ -17,12 +17,12 @@ namespace Winterfell.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        IMessages repository;
+        IMessageRepository repository;
         UserManager<AppUser> userManager;
 
         // any controller that needs to access the db must have an instance of the context object
         // passed to its constructor as a param (MessageContext c)
-        public HomeController(ILogger<HomeController> logger, IMessages r, UserManager<AppUser> u)
+        public HomeController(ILogger<HomeController> logger, IMessageRepository r, UserManager<AppUser> u)
         {
             _logger = logger;
             repository = r;
@@ -85,26 +85,26 @@ namespace Winterfell.Controllers
         }
 
         [Authorize]
-        public IActionResult Comment(int messageID)
+        public IActionResult Reply(int messageID)
         {
-            var commentVM = new CommentVM { MessageID = messageID };
+            var replyVM = new ReplyVM { MessageID = messageID };
 
-            return View(commentVM);
+            return View(replyVM);
         }
 
         [HttpPost]
-        public RedirectToActionResult Comment(CommentVM commentVM)
+        public RedirectToActionResult Reply(ReplyVM replyVM)
         {
-            // Comment is the domain model
-            var comment = new Comment { CommentText = commentVM.CommentText };
-            comment.Commenter = userManager.GetUserAsync(User).Result;
-            comment.CommentDate = DateTime.Now;
+            // reply is the domain model
+            var reply = new Reply { ReplyText = replyVM.ReplyText };
+            reply.User = userManager.GetUserAsync(User).Result;
+            reply.Date = DateTime.Now;
 
-            // get the message that this comment is for
-            Message message = repository.Messages.Where(m => m.MessageID == commentVM.MessageID).SingleOrDefault();
+            // get the message that this reply is for
+            Message message = repository.Messages.Where(m => m.MessageID == replyVM.MessageID).SingleOrDefault();
 
-            // store the message with the comment in the database
-            message.Comments.Add(comment);
+            // store the message with the reply in the database
+            message.Replies.Add(reply);
             repository.UpdateMessage(message);
 
             return RedirectToAction("Messages");

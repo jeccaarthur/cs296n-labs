@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Winterfell.Migrations
 {
-    public partial class Lab5 : Migration
+    public partial class Lab7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,7 +53,7 @@ namespace Winterfell.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -74,7 +74,7 @@ namespace Winterfell.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -159,7 +159,7 @@ namespace Winterfell.Migrations
                 columns: table => new
                 {
                     MessageID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SenderId = table.Column<string>(nullable: true),
                     RecipientId = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: false),
@@ -184,30 +184,30 @@ namespace Winterfell.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "Replies",
                 columns: table => new
                 {
-                    CommentID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CommenterId = table.Column<string>(nullable: true),
-                    CommentText = table.Column<string>(nullable: true),
-                    CommentDate = table.Column<DateTime>(nullable: false),
+                    ReplyID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    ReplyText = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
                     MessageID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.PrimaryKey("PK_Replies", x => x.ReplyID);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_CommenterId",
-                        column: x => x.CommenterId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Messages_MessageID",
+                        name: "FK_Replies_Messages_MessageID",
                         column: x => x.MessageID,
                         principalTable: "Messages",
                         principalColumn: "MessageID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Replies_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -220,7 +220,8 @@ namespace Winterfell.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -246,17 +247,8 @@ namespace Winterfell.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_CommenterId",
-                table: "Comments",
-                column: "CommenterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_MessageID",
-                table: "Comments",
-                column: "MessageID");
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_RecipientId",
@@ -267,6 +259,16 @@ namespace Winterfell.Migrations
                 name: "IX_Messages_SenderId",
                 table: "Messages",
                 column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Replies_MessageID",
+                table: "Replies",
+                column: "MessageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Replies_UserId",
+                table: "Replies",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -287,7 +289,7 @@ namespace Winterfell.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Replies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

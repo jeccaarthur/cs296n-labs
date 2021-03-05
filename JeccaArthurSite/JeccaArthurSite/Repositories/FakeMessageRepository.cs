@@ -5,11 +5,11 @@ using Winterfell.Models;
 
 namespace Winterfell.Repositories
 {
-    public class FakeMessagesRepository : IMessages
+    public class FakeMessageRepository : IMessageRepository
     {
         private List<Message> messages = new List<Message>();
 
-        public FakeMessagesRepository()
+        public FakeMessageRepository()
         {
         }
 
@@ -31,6 +31,16 @@ namespace Winterfell.Repositories
         }
 
         public void AddUser(Message message, AppUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteMessage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Message GetMessageByID(int id)
         {
             throw new NotImplementedException();
         }

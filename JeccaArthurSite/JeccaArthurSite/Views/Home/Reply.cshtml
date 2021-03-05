@@ -1,10 +1,10 @@
-﻿@model CommentVM
+﻿@model ReplyVM
 @{
-    ViewData["Title"] = "Comment";
+    ViewData["Title"] = "Reply";
 }
 
 <div class="text-center">
-    <h1>Write a Comment</h1>
+    <h1>Write a Reply</h1>
 </div>
 
 
@@ -18,9 +18,9 @@
                 <div class="form-group form-card p-5">
 
                     <div class="row p-3">
-                        <label for="recipientName" asp-for="CommentText">Comment:  &nbsp;&nbsp;</label><br />
-                        <textarea rows="5" class="form-control col-md-6" asp-for="CommentText" placeholder="Write your comment here..."></textarea>
-                        <span class="text-danger" asp-validation-for="CommentText"></span>
+                        <label for="reply" asp-for="ReplyText">Reply:  &nbsp;&nbsp;</label><br />
+                        <textarea id="reply" rows="5" class="form-control col-md-6" asp-for="ReplyText" placeholder="Write your reply here..."></textarea>
+                        <span class="text-danger" asp-validation-for="ReplyText"></span>
                     </div>
                     <br>
 

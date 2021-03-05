@@ -6,7 +6,7 @@ namespace Winterfell.Models
 {
     public class Message
     {
-        private List<Comment> comments = new List<Comment>();
+        private List<Reply> replies = new List<Reply>();
 
         public int MessageID { get; set; }
 
@@ -23,6 +23,6 @@ namespace Winterfell.Models
 
         public DateTime Date { get; set; }
 
-        public List<Comment> Comments { get { return comments; } }
+        public List<Reply> Replies { get { return replies; } }
     }
 }
